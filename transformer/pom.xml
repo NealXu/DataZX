@@ -28,6 +28,18 @@
             <groupId>org.scalatest</groupId>
             <artifactId>scalatest_2.12</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>io.nealxu</groupId>
+            <artifactId>datazx-common</artifactId>
+            <version>${project.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-log4j12</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
     </dependencies>
 
     <build>

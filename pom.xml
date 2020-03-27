@@ -26,6 +26,7 @@
         <!--slf4j 1.7.10 和 logback-classic 1.0.13 是好基友 -->
         <slf4j-api-version>1.7.10</slf4j-api-version>
         <logback-classic-version>1.0.13</logback-classic-version>
+        <commons-cli-version>1.2</commons-cli-version>
     </properties>
 
     <repositories>
@@ -80,6 +81,7 @@
                 <artifactId>logback-classic</artifactId>
                 <version>${logback-classic-version}</version>
             </dependency>
+
 
         </dependencies>
     </dependencyManagement>
