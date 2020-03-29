@@ -1,10 +1,9 @@
 package io.nealxu.datazx.common.exception
 
 import java.io.{PrintWriter, StringWriter}
-
 import io.nealxu.datazx.common.spi.ErrorCode
 
-private class DatazxException(errorCode: ErrorCode, message: String, cause: Throwable)
+class DatazxException(errorCode: ErrorCode, message: String, cause: Throwable)
   extends RuntimeException(s"$errorCode - $message - ${DatazxException.getMessage(cause)}") {
 
   def this(errorCode: ErrorCode, message: String) = {
@@ -22,7 +21,10 @@ object DatazxException {
   }
 
   def asDatazxException(errorCode: ErrorCode, message: String, throwable: Throwable): DatazxException = {
-    new DatazxException(errorCode, message, throwable)
+    throwable match {
+      case exception: DatazxException => exception
+      case _ => new DatazxException(errorCode, message, throwable)
+    }
   }
 
   private def getMessage(throwable: Throwable): String = {

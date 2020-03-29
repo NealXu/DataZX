@@ -1,4 +1,4 @@
-package io.nealxu.datazx.core.utils
+package io.nealxu.datazx.core.util
 
 import org.slf4j.{Logger, LoggerFactory}
 

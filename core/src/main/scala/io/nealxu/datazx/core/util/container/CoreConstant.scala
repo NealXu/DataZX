@@ -1,4 +1,4 @@
-package io.nealxu.datazx.core.utils.container
+package io.nealxu.datazx.core.util.container
 
 object CoreConstant {
 

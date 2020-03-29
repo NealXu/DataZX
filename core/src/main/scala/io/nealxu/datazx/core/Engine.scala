@@ -1,9 +1,10 @@
 package io.nealxu.datazx.core
 
 import io.nealxu.datazx.common.exception.DatazxException
-import io.nealxu.datazx.core.utils.container.CoreConstant
+import io.nealxu.datazx.common.util.Configuration
+import io.nealxu.datazx.core.util.container.CoreConstant
 import org.apache.commons.cli.{BasicParser, Options}
-import io.nealxu.datazx.core.utils.{ConfigParser, Configuration, LogSupport}
+import io.nealxu.datazx.core.util.{ConfigParser, LogSupport}
 
 import scala.util.Try
 
