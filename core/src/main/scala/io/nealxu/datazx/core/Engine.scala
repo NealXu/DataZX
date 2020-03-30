@@ -1,10 +1,10 @@
 package io.nealxu.datazx.core
 
 import io.nealxu.datazx.common.exception.DatazxException
-import io.nealxu.datazx.common.util.Configuration
+import io.nealxu.datazx.common.util.{Configuration, LogSupport}
 import io.nealxu.datazx.core.util.container.CoreConstant
 import org.apache.commons.cli.{BasicParser, Options}
-import io.nealxu.datazx.core.util.{ConfigParser, LogSupport}
+import io.nealxu.datazx.core.util.{ConfigParser, FrameworkErrorCode}
 
 import scala.util.Try
 
@@ -34,7 +34,10 @@ object Engine extends LogSupport {
     val jobPath = cmdLine.getOptionValue(OPT_JOB)
     val jobId = Try { cmdLine.getOptionValue(OPT_JOB_ID).toLong }.getOrElse(-1)
     val mode = cmdLine.getOptionValue(OPT_MODE)
-    if ("standalone".equalsIgnoreCase(mode)) throw new DatazxException
+    if ("standalone".equalsIgnoreCase(mode) && jobId == -1)
+      throw DatazxException.asDatazxException(
+        FrameworkErrorCode.CONFIG_ERROR, "jobid should not be invalid within non-standalone mode."
+      )
 
     val configuration = ConfigParser.parse(jobPath)
     configuration.set(CoreConstant.DATAZX_CORE_CONTAINER_JOB_ID, jobId)

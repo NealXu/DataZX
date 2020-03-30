@@ -33,7 +33,7 @@ class Configuration {
     try {
       findObject(path)
     } catch {
-      case e: Exception => null
+      case _: Exception => null
     }
   }
 
@@ -51,6 +51,18 @@ class Configuration {
       case s if s.equalsIgnoreCase("false") => false
       case s => throw new IllegalArgumentException(s"not an boolean: $path $s")
     }
+  }
+
+  def set(path: String, obj: Object): Object = {
+    checkPath(path)
+
+    val oldObj = get(path)
+    setObject(path, obj)
+    oldObj
+  }
+
+  private def setObject(path: String, obj: Object): Unit = {
+    // TODO
   }
 
   private def checkPath(path: String): Unit = {
@@ -72,7 +84,7 @@ class Configuration {
       target
     } else {
 
-      splitPath(path).foldLeft(target) {
+      splitPath2List(path).foldLeft(target) {
         (tmpTarget, pathSegment) =>
           pathSegment match {
             case mapPath if isMapPath(pathSegment) =>
@@ -86,7 +98,7 @@ class Configuration {
     }
   }
 
-  private def splitPath(path: String): List[String] = {
+  private def splitPath2List(path: String): List[String] = {
     StringUtils.split(path.replace("[", ".["), ".").toList
   }
 
